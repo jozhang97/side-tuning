@@ -1,0 +1,9 @@
+id,train,val,test
+collierville,1,0,0
+corozal,1,0,0
+ihlen,0,1,0
+mcdade,0,1,0
+muleshoe,0,1,0
+noxapater,0,1,0
+uvalda,0,1,0
+allensville,0,0,1

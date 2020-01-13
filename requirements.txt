@@ -1,0 +1,25 @@
+gym==0.10.9
+numba
+scikit-image
+numpy
+torch==1.0.1.post2
+torchvision
+torchsummary
+visdom
+ipdb
+sacred==0.7.4
+matplotlib
+tensorflow==1.5.0  # not sure if really needed
+psutil
+sklearn
+tensorboard==1.12
+tensorboardX
+watchdog
+pytest==3.4.2
+jupyterlab
+ipykernel
+gitpython
+moviepy
+GPUtil
+scikit-fmm
+dill
