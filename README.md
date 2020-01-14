@@ -29,16 +29,62 @@ Jeffrey O. Zhang, Alexander Sax, Amir Zamir, Leonidas Guibas, Jitendra Malik.
 <br>
 
 ## Quickstart [\[^\]](#Contents)
-Here, we will start on training a Side-tuning agent on the lifelong learning datasets - incremental CIFAR and Taskonomy.
+Here, we will start on training a Side-tuning agent on the lifelong learning datasets - incremental CIFAR and Taskonomy. In this setting, we train on a sequence of tasks and evaluate the performance of all tasks at the end of training. After a task has past, the agent never sees any more training data for the task (and is expected to perform on the validation set).
+In this setting, we are interested in performance, forward transfer (to new tasks) and catastrophic forgetting (or lack thereof).
+
+Pictorially, here is what Side-tuning on lifelong learning tasks looks like:
+<div align="center">
+  <img src="./assets/img/sidetuning_lifelong.png"  width="500px" />
+</div>
+
+
 You will need CUDA, Python 3.6+ and standard python libraries (e.g. torch, torchvision, numpy, tqdm, tensorboardX) on your machine. You may run into "Permission Denied" errors - these can often be fixed by `chown -R CUR_USER FILE_NAME` or `chmod -R 700 FILE_NAME`.
+<div align="center">
+  <img src="./assets/img/icifar.png"  width="400px" />
+</div>
+
 ### iCIFAR
+We train our side-tuning agent on the iCIFAR lifelong learning dataset - a dataset constructed by taking CIFAR-100 and randomly partitioning the classes into 10 sets of 10 tasks and then defining a sequence on the set. 
+For our base model, we use a ResNet-44 and for our side model, a 4 layer fully convolutional network. The ResNet-44 is pretrained on CIFAR-10 and the 4 layer FCN is distilled from the ResNet-44.
 ```
 git clone https://github.com/jozhang97/side-tuning.git              # get our repo
 cd side-tuning/tnt && pip install -e . && cd ..                     # install tnt, our logger
 python -m scripts.demo_icifar                                       # run script!
 ```
+The expected average accuracy is ~76%. Picture of Expected output:
+
+<div align="center">
+  <img src="./assets/img/icifar_expected_stdout.png"  width="200px" align="left"/>
+</div>  
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 
 ### Taskonomy
+We train our side-tuning agent on select tasks in the Taskonomy dataset.
+For our base model, we use a ResNet-50 and for our side model, a 5 layer fully convolutional network. The ResNet-50 is pretrained on the curvature estimation task and the 5 layer FCN is distilled from the ResNet-50.
+
+Note: This only uses a single building from the Taskonomy dataset (data sample), for simplicity and fast start up.
+
+<div align="center">
+  <img src="./assets/img/taskonomy.png"  width="400px" />
+</div>
+
 ```
 git clone https://github.com/jozhang97/side-tuning.git              # get our repo
 cd side-tuning/tnt && pip install -e . && cd ..                     # install tnt, our logger
@@ -98,6 +144,10 @@ iCIFAR
 ./scripts/run_lifelong_cifar.sh finetune ewc 4                      # Elastic Weight Consolidation [2]
 ./scripts/run_lifelong_cifar.sh sidetune pnn_v4_cifar               # Progressive Neural Networks [3]
 ```
+
+<div align="center">
+  <img src="./assets/img/robot.png"  width="400px" />
+</div>
 
 **RL**
 ```
